@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Polaroid : MonoBehaviour
 {
@@ -6,6 +7,9 @@ public class Polaroid : MonoBehaviour
     public MeshRenderer screenRenderer = null;
     public Transform spawnLocation = null;
 
+    public Renderer keyRenderer = null; // Anahtarın renderer bileşeni
+    public Material brightMaterial = null; // Parlak malzeme
+    private Material originalMaterial = null; // Orijinal malzeme
     private Camera renderCamera = null;
 
     private void Awake()
@@ -30,8 +34,22 @@ public class Polaroid : MonoBehaviour
 
     public void TakePhoto()
     {
+        StartCoroutine(TakePhotoCoroutine());
+    }
+
+    private IEnumerator TakePhotoCoroutine()
+    {
+        // Parlak malzemeyi anahtara uygula
+        originalMaterial = keyRenderer.material;
+        keyRenderer.material = brightMaterial;
+
+        // Fotoğrafı çek
+        yield return new WaitForEndOfFrame();
         Photo newPhoto = CreatePhoto();
         SetPhotoImage(newPhoto);
+
+        // Anahtarı eski haline döndür
+        keyRenderer.material = originalMaterial;
     }
 
     private Photo CreatePhoto()
