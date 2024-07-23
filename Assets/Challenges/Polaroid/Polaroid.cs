@@ -8,9 +8,13 @@ public class Polaroid : MonoBehaviour
     public Transform spawnLocation = null;
 
     public Renderer keyRenderer = null; // Anahtarın renderer bileşeni
-    public Material brightMaterial = null; // Parlak malzeme
+    public Material brightMaterial = null; // Parlak malzeme,
+    public ParticleSystem goldenGlow;
     private Material originalMaterial = null; // Orijinal malzeme
     private Camera renderCamera = null;
+
+    private GameObject oldPhoto = null; // Önceki fotoğraf için referans
+    private GameObject newPhoto = null; // Yeni fotoğraf için referans
 
     private void Awake()
     {
@@ -37,25 +41,60 @@ public class Polaroid : MonoBehaviour
         StartCoroutine(TakePhotoCoroutine());
     }
 
+
     private IEnumerator TakePhotoCoroutine()
     {
-        // Parlak malzemeyi anahtara uygula
         originalMaterial = keyRenderer.material;
         keyRenderer.material = brightMaterial;
 
+        // Partikül sistemini etkinleştir
+        if (goldenGlow != null)
+        {
+            goldenGlow.Play();
+        }
+
         // Fotoğrafı çek
         yield return new WaitForEndOfFrame();
-        Photo newPhoto = CreatePhoto();
-        SetPhotoImage(newPhoto);
+        newPhoto = CreatePhoto();
+        SetPhotoImage(newPhoto.GetComponent<Photo>());
+
+        // Önceki fotoğrafı düşür
+        if (oldPhoto != null)
+        {
+            DropOldPhoto(oldPhoto);
+        }
+
+        // Yeni fotoğrafı oldPhoto'ya at
+        oldPhoto = newPhoto;
 
         // Anahtarı eski haline döndür
         keyRenderer.material = originalMaterial;
+
+        // Partikül sistemini durdur
+        if (goldenGlow != null)
+        {
+            goldenGlow.Stop();
+        }
     }
 
-    private Photo CreatePhoto()
+     private void DropOldPhoto(GameObject oldPhoto)
+    {
+        Rigidbody rb = oldPhoto.GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = oldPhoto.AddComponent<Rigidbody>();
+        }
+        rb.useGravity = true;
+        rb.isKinematic = false;
+        oldPhoto.transform.parent = null; // Parent'ı kaldırarak serbest bırak
+    }
+
+
+
+    private GameObject CreatePhoto()
     {
         GameObject photoObject = Instantiate(photoPrefab, spawnLocation.position, spawnLocation.rotation, transform);
-        return photoObject.GetComponent<Photo>();
+        return photoObject;
     }
 
     private void SetPhotoImage(Photo photo)
@@ -72,6 +111,7 @@ public class Polaroid : MonoBehaviour
         Texture2D photo = new Texture2D(256, 256, TextureFormat.RGB24, false);
         photo.ReadPixels(new Rect(0, 0, 256, 256), 0, 0);
         photo.Apply();
+        
 
         return photo;
     }
