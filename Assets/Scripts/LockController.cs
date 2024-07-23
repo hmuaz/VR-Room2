@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LockController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject chestAttach;
+    public Rigidbody chestAttachRb;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+            Debug.Log("okey?");
+
+        if (other.gameObject.CompareTag("key"))
+        {
+            // Sandığı aktif hale getir
+            chestAttach.SetActive(true);
+            chestAttachRb.isKinematic = false;
+
+            // Anahtarı yok et
+            Destroy(other.gameObject);
+            // Kilit objesini görünmez yap
+            gameObject.SetActive(false);
+        }
     }
 }
