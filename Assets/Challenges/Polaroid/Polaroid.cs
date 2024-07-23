@@ -9,7 +9,7 @@ public class Polaroid : MonoBehaviour
 
     public Renderer keyRenderer = null; // Anahtarın renderer bileşeni
     public Material brightMaterial = null; // Parlak malzeme,
-    public ParticleSystem goldenGlow;
+    public GameObject pointLight;
     private Material originalMaterial = null; // Orijinal malzeme
     private Camera renderCamera = null;
 
@@ -48,9 +48,9 @@ public class Polaroid : MonoBehaviour
         keyRenderer.material = brightMaterial;
 
         // Partikül sistemini etkinleştir
-        if (goldenGlow != null)
+        if (pointLight != null)
         {
-            goldenGlow.Play();
+            pointLight.SetActive(true);
         }
 
         // Fotoğrafı çek
@@ -71,9 +71,9 @@ public class Polaroid : MonoBehaviour
         keyRenderer.material = originalMaterial;
 
         // Partikül sistemini durdur
-        if (goldenGlow != null)
+        if (pointLight != null)
         {
-            goldenGlow.Stop();
+            pointLight.SetActive(false);
         }
     }
 
