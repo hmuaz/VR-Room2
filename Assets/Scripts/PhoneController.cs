@@ -11,15 +11,20 @@ public class PhoneController : MonoBehaviour
     private AudioSource audioSource;
     public string enteredNumber = "";
 
+    
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+
+        
     }
 
     public void OnButtonPressed(string digit)
     {
         if (enteredNumber.Length < 4)
         {
+            Debug.Log(enteredNumber);
             enteredNumber += digit;
             //displayText.text = enteredNumber;
         }
@@ -54,4 +59,6 @@ public class PhoneController : MonoBehaviour
         enteredNumber = "";
         //displayText.text = "";
     }
+
+    
 }
