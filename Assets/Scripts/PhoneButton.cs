@@ -17,7 +17,6 @@ public class PhoneButton : MonoBehaviour
 
     public IEnumerator ChangeMaterialTemporarily(){
         Material originalMaterial = meshRenderer.material;
-    Debug.Log("çalışmışkert");
         meshRenderer.material = pressedMaterial;
         yield return new WaitForSeconds(0.5f); // Burada istediğiniz süreyi belirleyebilirsiniz
         meshRenderer.material = originalMaterial;

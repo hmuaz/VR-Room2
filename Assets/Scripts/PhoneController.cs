@@ -22,7 +22,7 @@ public class PhoneController : MonoBehaviour
 
     public void OnButtonPressed(string digit)
     {
-        if (enteredNumber.Length < 4)
+        if (enteredNumber.Length < 5)
         {
             Debug.Log(enteredNumber);
             enteredNumber += digit;
