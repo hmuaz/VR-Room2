@@ -14,6 +14,13 @@ public class PowerboxController : MonoBehaviour
     public GameObject sartelKirmizi;
     public GameObject sartelSiyah;
     public GameObject sartelSari;
+
+    public bool isKirmiziSartel = false;
+    public bool isMaviSartel = false;
+    public bool isSariSartel = false;
+    public bool isSiyahSartel = false;
+
+
     public bool isCombinationRight = false;
 
 
@@ -39,12 +46,16 @@ public class PowerboxController : MonoBehaviour
 
     public bool IsSartelDown(GameObject sartel)
     {
-        if (sartel.transform.eulerAngles.x > -60f)
+        if (sartel.transform.eulerAngles.x > -59f)
         {
+        Debug.Log("59");
+
             return true;
         }
-        else if (sartel.transform.eulerAngles.x < -120f)
+        else if (sartel.transform.eulerAngles.x < -119f)
         {
+        Debug.Log("119");
+
             return false;
         }
 
@@ -53,12 +64,13 @@ public class PowerboxController : MonoBehaviour
 
     public void CheckRightCombination()
     {
-        bool kirmiziSartel = IsSartelDown(sartelKirmizi);
-        bool maviSartel = IsSartelDown(sartelMavi);
-        bool sariSartel = IsSartelDown(sartelSari);
-        bool siyahSartel = IsSartelDown(sartelSiyah);
+        Debug.Log("CheckRightCombination");
+        isKirmiziSartel = IsSartelDown(sartelKirmizi);
+        isMaviSartel = IsSartelDown(sartelMavi);
+        isSariSartel = IsSartelDown(sartelSari);
+        isSiyahSartel = IsSartelDown(sartelSiyah);
 
-        if (kirmiziSartel == true && maviSartel == false && sariSartel == false && siyahSartel == true)
+        if (isKirmiziSartel == true && isMaviSartel == false && isSariSartel == false && isSiyahSartel == true)
         {
             isCombinationRight = true;
         }
