@@ -44,25 +44,29 @@ public class PowerboxController : MonoBehaviour
 
     }
 
-    public bool IsSartelDown(GameObject sartel)
+    
+
+    public void IsSartelDown(GameObject sartel)
     {
-        if (sartel.transform.eulerAngles.x > -59f)
+        float xAngle = sartel.transform.eulerAngles.x;
+        Debug.Log("Current x angle: " + xAngle);
+        if (sartel.transform.eulerAngles.x > 339f && sartel.transform.eulerAngles.x < 345f)
         {
-        Debug.Log("59");
+            Debug.Log("şartel yukarda");
 
-            return true;
+            //return true;
         }
-        else if (sartel.transform.eulerAngles.x < -119f)
+        else if (sartel.transform.eulerAngles.x > 315f && sartel.transform.eulerAngles.x < 325f)
         {
-        Debug.Log("119");
+            Debug.Log("şartel aşşada");
 
-            return false;
+            //return false;
         }
 
-        return false;
+        //return false;
     }
 
-    public void CheckRightCombination()
+    /* public void CheckRightCombination()
     {
         Debug.Log("CheckRightCombination");
         isKirmiziSartel = IsSartelDown(sartelKirmizi);
@@ -79,7 +83,7 @@ public class PowerboxController : MonoBehaviour
             isCombinationRight = false;
 
         }
-    }
+    } */
 
     public void IsCombinationRight()
     {
