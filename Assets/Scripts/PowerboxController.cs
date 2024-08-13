@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 
@@ -10,19 +11,14 @@ public class PowerboxController : MonoBehaviour
     public float intensityMultiplierForClose = 0;
     public float intensityMultiplierForOpen = 1.0f;
 
-    public GameObject sartelMavi;
-    public GameObject sartelKirmizi;
-    public GameObject sartelSiyah;
-    public GameObject sartelSari;
+    public Sartel sartelMavi;
+    public Sartel sartelKirmizi;
+    public Sartel sartelSiyah;
+    public Sartel sartelSari;
 
-    public bool isKirmiziSartel = false;
-    public bool isMaviSartel = false;
-    public bool isSariSartel = false;
-    public bool isSiyahSartel = false;
 
 
     public bool isCombinationRight = false;
-
 
     public void CloseLights()
     {
@@ -44,46 +40,43 @@ public class PowerboxController : MonoBehaviour
 
     }
 
-    
 
-    public void IsSartelDown(GameObject sartel)
+
+    public void IsSartelDown(Sartel sartel)
     {
-        float xAngle = sartel.transform.eulerAngles.x;
+        float xAngle = sartel.sartelObject.transform.eulerAngles.x;
         Debug.Log("Current x angle: " + xAngle);
-        if (sartel.transform.eulerAngles.x > 339f && sartel.transform.eulerAngles.x < 345f)
+        if (sartel.sartelObject.transform.eulerAngles.x > 339f && sartel.sartelObject.transform.eulerAngles.x < 345f)
         {
             Debug.Log("şartel yukarda");
-
-            //return true;
+            sartel.IsSartelUp = true;
+            sartel.IsSartelDown = false;
+            sartel.IsSartelMiddle = false;
         }
-        else if (sartel.transform.eulerAngles.x > 315f && sartel.transform.eulerAngles.x < 325f)
+        else if (sartel.sartelObject.transform.eulerAngles.x > 300f && sartel.sartelObject.transform.eulerAngles.x < 335f)
         {
             Debug.Log("şartel aşşada");
-
-            //return false;
-        }
-
-        //return false;
-    }
-
-    /* public void CheckRightCombination()
-    {
-        Debug.Log("CheckRightCombination");
-        isKirmiziSartel = IsSartelDown(sartelKirmizi);
-        isMaviSartel = IsSartelDown(sartelMavi);
-        isSariSartel = IsSartelDown(sartelSari);
-        isSiyahSartel = IsSartelDown(sartelSiyah);
-
-        if (isKirmiziSartel == true && isMaviSartel == false && isSariSartel == false && isSiyahSartel == true)
-        {
-            isCombinationRight = true;
+            sartel.IsSartelUp = false;
+            sartel.IsSartelDown = true;
+            sartel.IsSartelMiddle = false;
         }
         else
         {
-            isCombinationRight = false;
-
+            sartel.IsSartelUp = false;
+            sartel.IsSartelDown = false;
+            sartel.IsSartelMiddle = true;
         }
-    } */
+
+    }
+
+    public void CheckRightCombination()
+    {
+        if (sartelSari.IsSartelUp && sartelKirmizi.IsSartelUp && sartelMavi.IsSartelDown && sartelSiyah.IsSartelDown)
+        {
+            isCombinationRight = true;
+            OpenLights();
+        }
+    }
 
     public void IsCombinationRight()
     {

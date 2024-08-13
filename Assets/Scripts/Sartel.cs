@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Sartel : MonoBehaviour
 {
-    
+    public SartelRenk renk;
+    public GameObject sartelObject;
+    public bool IsSartelDown = false;
+    public bool IsSartelUp = false;
+    public bool IsSartelMiddle = false;
 
-    // Start is called before the first frame update
+
+    /* // Start is called before the first frame update
     void Start()
     {
         
@@ -17,5 +22,5 @@ public class Sartel : MonoBehaviour
     {
          float xAngle = transform.eulerAngles.x;
         Debug.Log("Current x angle: " + xAngle); 
-    }
+    } */
 }
