@@ -22,15 +22,15 @@ public class AnimateHandController : MonoBehaviour
 
     private void Update()
     {
-        AnimateGrip();
-        //AnimateTrigger();
+        //AnimateGrip();
+        AnimateTrigger();
 
     }
 
     private void AnimateTrigger()
     {
         _triggerValue = triggerInputActionReference.action.ReadValue<float>();
-        _handAnimator.SetFloat("Trigger", _triggerValue);
+        _handAnimator.SetFloat("Grip", _triggerValue);
 
     }
 
