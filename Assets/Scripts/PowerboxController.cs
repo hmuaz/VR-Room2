@@ -45,17 +45,14 @@ public class PowerboxController : MonoBehaviour
     public void IsSartelDown(Sartel sartel)
     {
         float xAngle = sartel.sartelObject.transform.eulerAngles.x;
-        Debug.Log("Current x angle: " + xAngle);
         if (sartel.sartelObject.transform.eulerAngles.x > 339f && sartel.sartelObject.transform.eulerAngles.x < 345f)
         {
-            Debug.Log("şartel yukarda");
             sartel.IsSartelUp = true;
             sartel.IsSartelDown = false;
             sartel.IsSartelMiddle = false;
         }
         else if (sartel.sartelObject.transform.eulerAngles.x > 300f && sartel.sartelObject.transform.eulerAngles.x < 335f)
         {
-            Debug.Log("şartel aşşada");
             sartel.IsSartelUp = false;
             sartel.IsSartelDown = true;
             sartel.IsSartelMiddle = false;

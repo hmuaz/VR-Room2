@@ -10,7 +10,6 @@ public class LockController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-            Debug.Log("okey?");
 
         if (other.gameObject.CompareTag("key"))
         {

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,24 +7,20 @@ public class PhoneController : MonoBehaviour
     //public Text displayText;
     public string requiredNumber = "1964";
     public AudioClip recordedMessage;
-    private AudioSource audioSource;
+    public AudioSource audioSource;
     public string enteredNumber = "";
+
+
 
     
 
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-
-        
-    }
 
     public void OnButtonPressed(string digit)
     {
-        if (enteredNumber.Length < 5)
+        if (enteredNumber.Length < 4)
         {
-            Debug.Log(enteredNumber);
             enteredNumber += digit;
+            Debug.Log(enteredNumber);
             //displayText.text = enteredNumber;
         }
 
@@ -39,6 +34,7 @@ public class PhoneController : MonoBehaviour
     {
         if (enteredNumber == requiredNumber)
         {
+            Debug.Log("right number");
             PlayRecordedMessage();
         }
         else
@@ -60,5 +56,5 @@ public class PhoneController : MonoBehaviour
         //displayText.text = "";
     }
 
-    
+
 }
