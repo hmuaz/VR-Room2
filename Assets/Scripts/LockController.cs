@@ -13,13 +13,10 @@ public class LockController : MonoBehaviour
 
         if (other.gameObject.CompareTag("key"))
         {
-            // Sandığı aktif hale getir
             chestAttach.SetActive(true);
             chestAttachRb.isKinematic = false;
 
-            // Anahtarı yok et
             Destroy(other.gameObject);
-            // Kilit objesini görünmez yap
             gameObject.SetActive(false);
         }
     }
