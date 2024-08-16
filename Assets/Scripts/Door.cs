@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public AnimationClip doorHandleAnimation;
 
-    public void PlayDoorHandleAnimation(){
-        
+    public void OpenDoor(){
+        GetComponent<Animator>().enabled = true;
     }
 
     
