@@ -15,6 +15,7 @@ public class NumberPadKey : MonoBehaviour
         if (enteredCode.Length < 4)
         {
             enteredCode += digit;
+            code.text = enteredCode;
             Debug.Log(enteredCode);
         }
 
@@ -26,9 +27,14 @@ public class NumberPadKey : MonoBehaviour
 
     private void CheckCode()
     {
+        Debug.Log("chechcode");
         if (enteredCode == requiredCode)
         {
+        Debug.Log("doğru");
+
             door.GetComponent<Door>().OpenDoor();
+            code.color = Color.green;
+            code.text = "Valid Code!";
         }
         else
         {
