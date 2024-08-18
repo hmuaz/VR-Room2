@@ -10,7 +10,7 @@ public class Door : MonoBehaviour
         Debug.Log("kapıaçılanzi");
         GetComponent<Animator>().enabled = true;
         GetComponent<Animator>().SetTrigger("OpenDoor");
-
+GetComponent<AudioSource>().Play();
     }
 
     
