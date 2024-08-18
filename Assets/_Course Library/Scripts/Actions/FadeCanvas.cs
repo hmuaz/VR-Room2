@@ -16,10 +16,16 @@ public class FadeCanvas : MonoBehaviour
     private float alpha = 0.0f;
 
     private float quickFadeDuration = 0.25f;
+    public float wakeUP;
 
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
+    }
+
+    void Start()
+    {
+        StartFadeOut();
     }
 
     public void StartFadeIn()
@@ -32,6 +38,12 @@ public class FadeCanvas : MonoBehaviour
     {
         StopAllCoroutines();
         CurrentRoutine = StartCoroutine(FadeOut(defaultDuration));
+    }
+
+    public void StartSlowlyFadeOut()
+    {
+        StopAllCoroutines();
+        CurrentRoutine = StartCoroutine(SlowlyFadeOut(wakeUP, 1));
     }
 
     public void QuickFadeIn()
@@ -70,9 +82,39 @@ public class FadeCanvas : MonoBehaviour
         }
     }
 
+    private IEnumerator SlowlyFadeOut(float slowDuration, float fastDuration)
+    {
+        float elapsedTime = 0.0f;
+
+        // İlk olarak alpha'yı 0.9 ile 1 arasında yavaşça azalt.
+        while (elapsedTime < slowDuration)
+        {
+            float alpha = Mathf.SmoothStep(1.0f, 0.9f, elapsedTime / slowDuration);
+            SetAlpha(alpha);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Daha sonra alpha'yı 0.9'dan 0'a hızla azalt.
+        elapsedTime = 0.0f; // Zamanı sıfırla
+        while (elapsedTime < fastDuration)
+        {
+            float alpha = Mathf.SmoothStep(0.9f, 0.0f, elapsedTime / fastDuration);
+            SetAlpha(alpha);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Son olarak alpha tamamen sıfırlanmış olmalı
+        SetAlpha(0.0f);
+    }
+
+
+
     private void SetAlpha(float value)
     {
         alpha = value;
         canvasGroup.alpha = alpha;
     }
+
 }
