@@ -23,7 +23,7 @@ public class AnimateHandController : MonoBehaviour
     private void Update()
     {
         //AnimateGrip();
-        AnimateTrigger();
+        //AnimateTrigger();
 
     }
 

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Box
   - key
+  - SartelAlt
+  - SartelUst
   layers:
   - Default
   - TransparentFX

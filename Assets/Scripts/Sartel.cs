@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Sartel : MonoBehaviour
@@ -11,16 +12,23 @@ public class Sartel : MonoBehaviour
     public bool IsSartelMiddle = false;
 
 
-    /* // Start is called before the first frame update
-    void Start()
+    void OnTriggerEnter(Collider other)
+{
+    // Diğer objenin tag'ine bakarak işlem yapabilirsiniz
+    if (other.CompareTag("SartelAlt"))
     {
+        IsSartelDown = true;
+        IsSartelUp = false;
+        IsSartelMiddle = false;
         
     }
-
-    // Update is called once per frame
-    void Update()
+    if (other.CompareTag("SartelUst"))
     {
-         float xAngle = transform.eulerAngles.x;
-        Debug.Log("Current x angle: " + xAngle); 
-    } */
+        IsSartelDown = false;
+        IsSartelUp = true;
+        IsSartelMiddle = false;
+        
+    }
+}
+
 }

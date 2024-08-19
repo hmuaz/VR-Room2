@@ -20,6 +20,10 @@ public class PowerboxController : MonoBehaviour
 
     public bool isCombinationRight = false;
 
+    void Start(){
+        CloseLights();
+    }
+
     public void CloseLights()
     {
         UnityEngine.RenderSettings.ambientIntensity = intensityMultiplierForClose;
@@ -42,7 +46,7 @@ public class PowerboxController : MonoBehaviour
 
 
 
-    public void IsSartelDown(Sartel sartel)
+    /* public void IsSartelDown(Sartel sartel)
     {
         float xAngle = sartel.sartelObject.transform.eulerAngles.x;
         if (sartel.sartelObject.transform.eulerAngles.x > 339f && sartel.sartelObject.transform.eulerAngles.x < 345f)
@@ -64,7 +68,7 @@ public class PowerboxController : MonoBehaviour
             sartel.IsSartelMiddle = true;
         }
 
-    }
+    } */
 
     public void CheckRightCombination()
     {
