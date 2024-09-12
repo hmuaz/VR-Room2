@@ -20,9 +20,9 @@ public class PowerboxController : MonoBehaviour
 
     public bool isCombinationRight = false;
 
-    void Start(){
+    /* void Start(){
         CloseLights();
-    }
+    } */
 
     public void CloseLights()
     {
