@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Video;
-using UnityEngine.XR.Interaction.Toolkit;
+
 
 public class Door : MonoBehaviour
 {
@@ -25,7 +25,7 @@ public class Door : MonoBehaviour
 
     public void OnVideoEnd(VideoPlayer vp)
     {
-        doorHandle.GetComponent<XRGrabInteractable>().enabled = true;
+        doorHandle.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>().enabled = true;
         videoPlayer.loopPointReached -= OnVideoEnd;
 
     }
