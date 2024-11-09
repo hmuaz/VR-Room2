@@ -9,6 +9,7 @@ public class PhoneController : MonoBehaviour
     public AudioClip recordedMessage;
     public AudioSource audioSource;
     public string enteredNumber = "";
+    public AudioClip wrongCode;
 
 
 
@@ -39,7 +40,9 @@ public class PhoneController : MonoBehaviour
         }
         else
         {
+            
             ResetPhone();
+            
         }
     }
 
@@ -53,6 +56,8 @@ public class PhoneController : MonoBehaviour
     private void ResetPhone()
     {
         enteredNumber = "";
+        audioSource.clip = wrongCode;
+        audioSource.Play();
         //displayText.text = "";
     }
 
