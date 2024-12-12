@@ -79,6 +79,11 @@ public class PowerboxController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        CheckRightCombination();
+    }
+
     public void IsCombinationRight()
     {
         if (isCombinationRight)
